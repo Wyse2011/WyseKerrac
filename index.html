@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wyse — The Hollow of the Golmore</title>
+<meta name="description" content="Wyse: half Rava Viera, half Garlean. A Final Fantasy XIV character profile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Cormorant','Cormorant Garamond',serif;
+  --font-body:'Switzer','Helvetica Neue',sans-serif;
+  --bg:#070b09; --surface:#0d1512; --surface-2:#121d19; --line:rgba(150,220,200,.14);
+  --text:#e7ece6; --muted:#9fb0a8; --faint:#6c7c75;
+  --aether:#5fe3c4; --aether-dim:#2b8f7a; --crimson:#b8343a; --pearl:#efe9df; --steel:#9eb3c4;
+  --text-xs:clamp(.85rem,.82rem + .15vw,.92rem);
+  --text-sm:clamp(1rem,.97rem + .2vw,1.08rem);
+  --text-base:clamp(1.12rem,1.06rem + .3vw,1.25rem);
+  --text-lg:clamp(1.35rem,1.2rem + .6vw,1.6rem);
+  --text-xl:clamp(1.6rem,1.3rem + 1.4vw,2.4rem);
+  --text-2xl:clamp(2.2rem,1.6rem + 3vw,3.8rem);
+  --text-hero:clamp(4rem,2.4rem + 7vw,8.5rem);
+  --wrap:min(1120px,100% - 2.5rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:var(--font-body);font-size:var(--text-base);line-height:1.7;color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:var(--aether)}
+.wrap{width:var(--wrap);margin-inline:auto}
+.eyebrow{font-size:var(--text-xs);letter-spacing:.28em;text-transform:uppercase;color:var(--aether);font-weight:500}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.05;letter-spacing:-.01em}
+h2{font-size:var(--text-2xl)}
+h3{font-size:var(--text-xl)}
+p+p{margin-top:1em}
+
+/* fixed jungle backdrop */
+.backdrop{position:fixed;inset:0;z-index:-2;background:url(img/bg_golmore.webp) center/cover no-repeat;transition:opacity 1.2s ease}
+.backdrop.garlemald{background-image:url(img/bg_garlemald.webp);opacity:0}
+body.north .backdrop.garlemald{opacity:1}
+.veil{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at center,rgba(7,11,9,.78),rgba(7,11,9,.45) 75%),linear-gradient(180deg,rgba(7,11,9,.2),rgba(7,11,9,.5))}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1rem clamp(1.25rem,3vw,2.5rem);background:rgba(7,11,9,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(150,220,200,.08);transition:background .3s}
+nav.solid{background:rgba(7,11,9,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .mark{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:.18em;color:var(--pearl);text-decoration:none}
+nav ul{display:flex;gap:1.6rem;list-style:none}
+nav ul a{color:#d5ddd8;text-shadow:0 1px 6px rgba(0,0,0,.9);text-decoration:none;font-size:var(--text-sm);letter-spacing:.08em;transition:color .2s}
+nav ul a:hover{color:var(--aether)}
+
+/* hero */
+.hero{position:relative;min-height:min(100svh,calc(56.25vw + 58px));display:flex;align-items:flex-start;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% center;top:58px;height:calc(100% - 58px)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,9,.8) 0%,rgba(7,11,9,.35) 30%,transparent 50%),linear-gradient(0deg,var(--bg) 0%,transparent 18%)}
+.hero .content{position:relative;z-index:2;padding-top:clamp(7rem,17vw,15rem);padding-bottom:3rem}
+.hero h1{font-size:var(--text-hero);font-weight:700;letter-spacing:.06em;color:var(--pearl);line-height:.9;text-shadow:0 0 40px rgba(95,227,196,.25)}
+.hero .sub{font-family:var(--font-display);font-style:italic;font-size:var(--text-xl);color:var(--text);margin-top:.4rem}
+.hero .tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem}
+.tag{font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;padding:.45rem .9rem;border:1px solid var(--line);border-radius:999px;background:rgba(13,21,18,.6);backdrop-filter:blur(6px);color:var(--muted)}
+.scroll-cue{position:absolute;bottom:1.5rem;right:2rem;z-index:2;font-size:var(--text-xs);letter-spacing:.3em;color:var(--faint);writing-mode:vertical-rl}
+
+section{padding:clamp(4.5rem,10vw,8rem) 0}
+
+/* intro / profile */
+.profile{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2rem,5vw,5rem);align-items:center}
+.profile .portrait{border-radius:4px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.profile blockquote{font-family:var(--font-display);font-size:var(--text-xl);font-style:italic;line-height:1.25;color:var(--pearl);margin:1.2rem 0 1.6rem;max-width:22ch}
+.profile p{color:#b6c4bd;max-width:60ch}
+.facts{margin-top:2rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.facts div{padding:.9rem 0;border-bottom:1px solid var(--line)}
+.facts div:nth-child(odd){padding-right:1rem}
+.facts dt{font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.facts dd{font-size:var(--text-sm);color:var(--text);margin-top:.15rem}
+
+
+.rp-status{display:flex;gap:.9rem;align-items:flex-start;margin-top:1.6rem;padding:1rem 1.2rem;border:1px solid rgba(95,227,196,.35);border-radius:4px;background:rgba(95,227,196,.07)}
+.rp-status .dot{flex:none;width:10px;height:10px;border-radius:50%;margin-top:.45rem;background:var(--aether);box-shadow:0 0 10px var(--aether);animation:pulse 2.4s ease-in-out infinite}
+.rp-status strong{font-size:var(--text-sm);letter-spacing:.2em;color:var(--aether)}
+.rp-status p{margin:0;font-size:var(--text-sm);color:var(--text)}
+@keyframes pulse{50%{opacity:.4}}
+.traits-wrap{margin-top:clamp(3.5rem,7vw,5.5rem)}
+.traits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;margin-top:1.8rem}
+.traits article{padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:4px;background:rgba(13,21,18,.68);backdrop-filter:blur(6px)}
+.traits .t-label{display:block;font-size:var(--text-xs);letter-spacing:.2em;text-transform:uppercase;color:var(--aether);margin-bottom:.5rem}
+.traits p{font-size:var(--text-sm);color:#c3cfc9;margin:0}
+.traits .coffee{border-color:rgba(201,140,82,.45);background:linear-gradient(160deg,rgba(60,36,20,.55),rgba(13,21,18,.7))}
+.traits .coffee .t-label{color:#d9a066}
+@media (max-width:860px){.traits{grid-template-columns:1fr}}
+@media (min-width:861px) and (max-width:1100px){.traits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* chapters */
+.chapters-head{text-align:center;margin-bottom:clamp(3rem,6vw,5rem)}
+.chapters-head p{color:var(--muted);max-width:52ch;margin:1rem auto 0}
+.chapter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;margin-bottom:clamp(4rem,9vw,7rem)}
+.chapter:nth-child(even) .art{order:2}
+.chapter .art{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
+.chapter .art img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform 1.2s ease}
+.chapter .art.tall img{aspect-ratio:4/5}
+.chapter:hover .art img{transform:scale(1.03)}
+.chapter .num{font-family:var(--font-display);font-size:var(--text-lg);color:var(--aether);letter-spacing:.2em}
+.chapter h3{margin:.3rem 0 1.1rem}
+.chapter p{color:#b6c4bd}
+.chapter .pull{color:var(--pearl);font-family:var(--font-display);font-style:italic;font-size:var(--text-lg);line-height:1.4;border-left:2px solid var(--aether-dim);padding-left:1rem;margin-top:1.4rem}
+
+/* text-only interlude */
+.interlude{text-align:center;padding:clamp(3rem,7vw,5rem) 0}
+.interlude p{font-family:var(--font-display);font-size:var(--text-xl);font-style:italic;color:var(--pearl);max-width:28ch;margin-inline:auto;line-height:1.3}
+
+/* north */
+.north-band{padding-top:0}
+.north-band .eyebrow{color:var(--steel)}
+.north-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-top:2.5rem}
+.north-grid article{background:rgba(13,18,22,.7);backdrop-filter:blur(8px);border:1px solid rgba(158,179,196,.16);padding:1.6rem;border-radius:4px}
+.north-grid .yr{font-family:var(--font-display);font-size:var(--text-xl);color:var(--steel)}
+.north-grid h4{font-size:var(--text-sm);letter-spacing:.12em;text-transform:uppercase;margin:.4rem 0 .6rem;color:var(--text)}
+.north-grid p{font-size:var(--text-sm);color:var(--muted)}
+
+/* blades */
+.blades{position:relative}
+.blades .frame{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
+.blades .frame img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.blades .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,11,9,.95),transparent 55%)}
+.blades .cap{position:absolute;left:clamp(1.25rem,4vw,3rem);bottom:clamp(1.25rem,4vw,3rem);right:clamp(1.25rem,4vw,3rem);z-index:2;max-width:56ch}
+.blades .cap p{color:var(--muted);margin-top:.8rem}
+.specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);margin-top:1px;border:1px solid var(--line);border-top:0}
+.specs div{background:var(--surface);padding:1.3rem 1.4rem}
+.specs dt{font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--aether)}
+.specs dd{font-size:var(--text-sm);color:var(--muted);margin-top:.3rem}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:.8rem;margin-top:2.5rem}
+.gallery figure{position:relative;overflow:hidden;border-radius:4px;border:1px solid var(--line);cursor:zoom-in}
+.gallery figure img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease,filter .4s}
+.gallery figure:hover img{transform:scale(1.05);filter:brightness(1.15)}
+.gallery .w2{grid-column:span 2}.gallery .h2{grid-row:span 2}
+.gallery figcaption{position:absolute;left:.8rem;bottom:.6rem;font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--pearl);text-shadow:0 1px 8px #000}
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(3,5,4,.94);display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-height:90vh;max-width:95vw;border-radius:4px}
+
+/* threads */
+.threads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem;margin-top:2.5rem}
+.threads li{list-style:none;padding:1.5rem 1.6rem;border:1px solid var(--line);border-radius:4px;background:rgba(13,21,18,.65);backdrop-filter:blur(6px);font-family:var(--font-display);font-size:var(--text-lg);line-height:1.35;color:var(--pearl);font-style:italic}
+.threads li span{display:block;font-family:var(--font-body);font-style:normal;font-size:var(--text-xs);letter-spacing:.2em;text-transform:uppercase;color:var(--aether);margin-bottom:.5rem}
+
+footer{padding:4rem 0 3rem;text-align:center;color:var(--faint);font-size:var(--text-xs);letter-spacing:.12em}
+footer .pearl{width:14px;height:14px;border-radius:50%;margin:0 auto 1.2rem;background:radial-gradient(circle at 35% 30%,#fff,var(--pearl) 40%,#a49d92);box-shadow:0 0 18px rgba(239,233,223,.5)}
+
+/* reveal */
+.reveal{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* motes */
+#motes{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+@media (max-width:860px){
+  nav ul{display:none}
+  .hero{min-height:auto;flex-direction:column;align-items:stretch}
+  .hero img{position:relative;top:auto;height:auto;aspect-ratio:4/5;object-position:64% center;margin-top:58px}
+  .hero::after{background:linear-gradient(0deg,var(--bg) 0%,rgba(7,11,9,.6) 30%,transparent 50%)}
+  .hero .content{padding-top:0;margin-top:-2.5rem;padding-bottom:2.5rem}
+  .profile,.chapter{grid-template-columns:1fr}
+  .chapter:nth-child(even) .art{order:0}
+  .north-grid,.specs{grid-template-columns:1fr}
+  .threads{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:160px}
+  .gallery .w2{grid-column:span 2}
+  .blades .frame img{aspect-ratio:4/5}
+  .scroll-cue{display:none}
+  .facts{grid-template-columns:1fr}
+  .facts div:nth-child(odd){padding-right:0}
+}
+
+/* story long-form */
+.chapter{align-items:start}
+.chapter .art{position:sticky;top:96px}
+.chapter .text p{margin-bottom:1rem}
+.chapter .art img{aspect-ratio:4/5}
+.wide{margin:0 0 clamp(2rem,5vw,3rem);border:1px solid var(--line);border-radius:4px;overflow:hidden;background:rgba(10,14,16,.78);backdrop-filter:blur(8px)}
+.wide img{width:100%;aspect-ratio:21/9;object-fit:cover;cursor:zoom-in}
+.wide figcaption{padding:clamp(1.4rem,4vw,2.6rem);max-width:72ch}
+.wide figcaption p{color:#b6c4bd;margin-bottom:1rem}
+.wide .pull{color:var(--pearl);font-family:var(--font-display);font-style:italic;font-size:var(--text-lg);border-left:2px solid var(--steel);padding-left:1rem}
+/* nav f-list */
+nav{gap:1rem}
+nav ul{margin-left:auto}
+.nav-flist,.flist-btn{display:inline-flex;align-items:center;border:1px solid rgba(95,227,196,.55);border-radius:999px;color:var(--aether);text-decoration:none;letter-spacing:.14em;text-transform:uppercase;font-size:var(--text-xs);background:rgba(7,11,9,.5);transition:background .2s,color .2s}
+.nav-flist{padding:.45rem 1rem;margin-left:1.2rem}
+.nav-flist:hover,.flist-btn:hover{background:var(--aether);color:#06110d}
+/* ooc */
+.ooc-lede{color:#c3cfc9;max-width:62ch;margin-top:1rem}
+.ooc-head{text-align:center}
+.ooc-head .ooc-lede{margin-inline:auto}
+.ooc .rp-status{max-width:none;width:100%;justify-content:center;text-align:center;margin-top:2rem}
+.ooc .rp-status strong{display:inline-flex;align-items:center;gap:.6rem}
+.ooc .rp-status strong .dot{display:inline-block;margin-top:0}
+.ooc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:2rem;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.ooc-grid div{background:rgba(13,21,18,.85);padding:1.2rem 1.4rem}
+.ooc-grid dt{font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--aether)}
+.ooc-grid dd{font-size:var(--text-sm);color:var(--text);margin-top:.3rem}
+.ooc-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;margin-top:1.1rem}
+.ooc-notes article{padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:4px;background:rgba(13,21,18,.75);backdrop-filter:blur(6px)}
+.ooc-notes .t-label{display:block;font-size:var(--text-xs);letter-spacing:.2em;text-transform:uppercase;color:var(--aether);margin-bottom:.5rem}
+.ooc-notes p{font-size:var(--text-sm);color:#c3cfc9}
+.ooc-cta{margin-top:2.4rem;text-align:center}
+.flist-btn{padding:.95rem 2rem;font-size:var(--text-sm)}
+@media (max-width:860px){.chapter .art{position:relative;top:auto}.chapter .art img{aspect-ratio:4/3}.ooc-grid,.ooc-notes{grid-template-columns:1fr}.wide img{aspect-ratio:4/3}}
+
+/* readability: dark outline on all text */
+body{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,0 0 6px rgba(0,0,0,.9),0 2px 10px rgba(0,0,0,.8)}
+.chapter p,.ooc-notes p,.ooc-grid dd,.profile p,.traits p,.ooc-lede{color:#e3eae5}
+.nav-flist:hover,.flist-btn:hover{text-shadow:none}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');document.body.classList.add('js')</script>
+<div class="backdrop"></div><div class="veil"></div>
+<canvas id="motes" aria-hidden="true"></canvas>
+
+<nav>
+  <a class="mark" href="#top">WYSE</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#ooc">OOC</a></li>
+  </ul>
+  <a class="nav-flist" href="https://www.f-list.net/c/wyse%20kerrac/" target="_blank" rel="noopener">F-list</a>
+</nav>
+
+<header class="hero" id="top">
+  <img src="img/cover_polished.webp" alt="Wyse crouched on a giant moss-covered root in the Golmore Jungle at night, his curved blade glowing green">
+  <div class="wrap content">
+    <p class="eyebrow">Final Fantasy XIV &middot; Character Profile</p>
+    <h1>WYSE</h1>
+    <p class="sub">The Hollow of the Golmore</p>
+    <div class="tags">
+      <span class="tag">Half Rava Viera</span>
+      <span class="tag">Half Garlean</span>
+      <span class="tag">150&ndash;200 Years</span>
+    </div>
+  </div>
+  <span class="scroll-cue">SCROLL</span>
+</header>
+
+<main>
+<section id="about">
+  <div class="wrap profile">
+    <div class="portrait reveal"><img src="img/portrait_vertical.webp" alt="Full-body portrait of Wyse standing in the jungle with a blade raised near his chest" loading="lazy"></div>
+    <div class="reveal">
+      <p class="eyebrow">Wanderer &middot; Engineer &middot; Exile</p>
+      <blockquote>"He belongs to neither, and he has made his peace with that, mostly."</blockquote>
+      <p>Wyse looks like a seasoned Viera in the prime of his life. Nothing on his face reveals what he is. He treats aether the way a desert traveler treats water: something to be gathered, stored, and spent with care, and never assumed.</p>
+      <p>The Viera do not fully trust him. The Garleans would never claim him.</p>
+      <dl class="facts">
+        <div><dt>Gender</dt><dd>Male</dd></div>
+        <div><dt>Age</dt><dd>150&ndash;200 (exact age uncertain)</dd></div>
+        <div><dt>Orientation</dt><dd>Straight</dd></div>
+        <div><dt>Role</dt><dd>Dom</dd></div>
+        <div><dt>Race</dt><dd>Garlean / Viera hybrid</dd></div>
+        <div><dt>Homeland</dt><dd>Golmore Jungle, Dalmasca</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="wrap traits-wrap">
+    <div class="reveal"><p class="eyebrow">At a Glance</p><h3>What you'll notice</h3></div>
+    <div class="traits">
+      <article class="reveal"><span class="t-label">Build</span><p>A Garlean/Viera hybrid. Taller, larger and broader than the common Viera, and he grows facial hair.</p></article>
+      <article class="reveal"><span class="t-label">Keen Nose</span><p>Raised in the wilds, he has a sharp sense of smell and often catches small details others might miss.</p></article>
+      <article class="reveal"><span class="t-label">Distractible</span><p>Unique or odd smells can break his concentration and pull his attention away.</p></article>
+      <article class="reveal"><span class="t-label">Lost in Thought</span><p>Often lost in thought, and not always paying attention to what is going on around him.</p></article>
+      <article class="reveal"><span class="t-label">Approach Directly</span><p>If you want his attention, be forthcoming and talk to him.</p></article>
+      <article class="reveal coffee"><span class="t-label">Coffee</span><p>Pretty much always has a cup of coffee with him. Want his attention, or to get in his good graces? Offer him coffee.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <div class="chapters-head reveal">
+      <p class="eyebrow">The Story</p>
+      <h2>Born of the wood and the iron</h2>
+      <p>The full tale of Wyse, from a patrol at the jungle's edge to the wanderer he is today.</p>
+    </div>
+
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_hunting.webp" alt="Wyse clinging to a giant mossy tree trunk at night above a campfire" loading="lazy" style="object-position:40% center"></div>
+      <div class="text">
+        <h3>The Patrol</h3>
+<p>Nearly two hundred years ago, long before any empire bore its name, the Garleans were a small and bitter people. Other nations had driven them into the frozen north of Ilsabard for a single reason: they could not wield magic. They endured by learning to build what they could not cast.</p>
+<p>Ahmetra was a huntress of the Rava, the Viera of the Golmore Jungle. Like all Rava, she lived by the Green Word, the old law that forbade contact with the outside world except to protect the wood. She walked the jungle's edge, where outsiders sometimes strayed, and her duty was to send them back the way they came.</p>
+<p>One season her patrol found a camp of strangers at the forest's border: a Garlean expedition from that struggling northern republic, ranging far south in search of metal, land, and the secrets of peoples who could do what they could not. Ahmetra went alone to drive them off. One of them caught her.</p>
+<p>She never learned his name. She remembered only his voice, the smell of oil and iron on his tools, and the pale pearl set in the middle of his forehead.</p>
+        <p class="pull">She returned to the wood and told no one. Months later, she bore a son.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_hunting2.webp" alt="Close view of Wyse's tattooed arm extended with a crimson-hilted blade" loading="lazy" style="object-position:30% center"></div>
+      <div class="text">
+        <h3>The Child Who Grew Too Fast</h3>
+<p>She named him Wyse. From his first year, it was clear he was not like the others.</p>
+<p>Viera children grow slowly, as befits a people who live for centuries. Wyse did not. His father's blood drove him to grow at the pace of a human child. By ten summers he stood as tall as Viera three times his age. By eighteen he was a grown man, while the children born in the same season as him were still children. The elders noticed. So did everyone else.</p>
+<p>And there was the mark: a small, smooth swelling of pearl at the center of his brow. It was a faint, half-formed third eye, the sign of the Garlean blood. Ahmetra bound it beneath wrapped cloth from the day he was born and told him never to let anyone see it. Wyse learned young that it was the one part of himself he could never explain away.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_hunting3.webp" alt="Wyse with twin glowing blades drawn between giant trees, facing a striped horned beast" loading="lazy" style="object-position:55% center"></div>
+      <div class="text">
+        <h3>The Hollow</h3>
+<p>Every Viera child learns to listen to the wood and to call upon the aether within themselves: to warm cold hands, to close a shallow cut, to steady an arrow in flight. These are small things, as natural to the Viera as breathing.</p>
+<p>Wyse could do none of them. When he reached inward, there was nothing there to reach. Like his father's people, he could not produce or shape aether of his own.</p>
+<p>The other children gave him a name for it: the Hollow. Some of the elders said worse.</p>
+        <p class="pull">A Viera who cannot touch the wood, they murmured, is no Viera at all.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_waterfall.webp" alt="Wyse standing waist-deep in a misty pool beside a waterfall, looking up" loading="lazy" style="object-position:68% center"></div>
+      <div class="text">
+        <h3>The Spring</h3>
+<p>When Wyse was fourteen, an older Viera tore the cloth from his brow in front of the others. For the first time, someone spoke the word aloud: Garlean.</p>
+<p>That night he went alone into the deep jungle, to a grove where an old aetherial spring rose from the stone. He drew his hunting knife and cut the mark from his own forehead.</p>
+<p>It went badly. The pearl was rooted deeper than he had imagined, and the blood would not stop. He fell into the moss beside the spring, certain he would die there, and almost glad of it.</p>
+<p>Then he felt something he had never felt in his life. The aether of the spring, of the roots and the moss and the night air itself, came rushing into him like water into a dry riverbed. It poured into the wound. Flesh knit to flesh. Bone smoothed beneath it. The emptiness he had carried since birth was, for one moment, full.</p>
+<p>He woke at dawn with his brow whole and unmarked. There was no scar and no sign that the third eye had ever been there. The only proof was the blood drying on the stones and a small, pale pearl lying in the moss beside his hand.</p>
+        <p class="pull">He kept it. He has never told anyone why.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <div class="art"><img src="img/cover_polished.webp" alt="Wyse crouched on a giant moss-covered root in the Golmore, his blade glowing green" loading="lazy" style="object-position:62% center"></div>
+      <div class="text">
+        <h3>The Gift and the Curse</h3>
+<p>Over the years that followed, Wyse slowly came to understand what had happened at the spring.</p>
+<p>He could not make aether, but he could take it. He could draw it in from the living world around him: from water, from trees, from storms, from the ground beneath his feet. In places rich with aether he could heal wounds, move faster than he had any right to, and strike with real force.</p>
+<p>But the gift had a cruel edge. Whatever he absorbed would not stay. If he did not spend it quickly, it bled out of him like heat from an open hand, and he was hollow again. In places where the land's aether ran thin, he was little more than an ordinary man.</p>
+        <p class="pull">He needed a way to keep it.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <div class="art"><img src="img/scene_blades.webp" alt="Twin blades with crimson-wrapped hilts and glowing wire-wound crystal cores, one pommel set with a pearl" loading="lazy" style="object-position:55% center"></div>
+      <div class="text">
+        <h3>The First Blades</h3>
+<p>Here his father's blood showed itself once more, and in a way Wyse would spend decades resenting. He had a gift for making things. He had the patience for mechanisms, an uncanny sense of how pieces fit together, and steady hands with metal and wire.</p>
+<p>For nearly ten years he worked in secret. He built a pair of blades, and into each hilt he set a crystal core wrapped in hand-wound wire, designed to hold the aether he absorbed so it could not slip away. When he needed it, he could draw it back out to strengthen a strike, mend his body, or simply survive another day.</p>
+<p>The first versions were crude. One core cracked and burned his palm so badly that the scar remains to this day. But each attempt was better than the last, until the blades held true.</p>
+<p>Into the pommel of one, he set the pearl from the spring. He turned the last piece of his father into something that served him.</p>
+        <p class="pull">To Wyse, the blades are more than weapons. They are the only certainty he has that he will never be empty again.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_smithing.webp" alt="Wyse raising a hammer over a workbench in a lamplit workshop at night" loading="lazy" style="object-position:60% center"></div>
+      <div class="text">
+        <h3>Leaving the Wood</h3>
+<p>When Wyse came of age, the Green Word had already decided much of his path. Rava men may not live within the villages. They become Wood-Warders, solitary guardians who protect the forest from its edges.</p>
+<p>Wyse might have accepted that life. But in time his workshop was discovered: wire, crystal, and machinery that looked far too much like the work of outsiders. And with it, Ahmetra's long-kept secret finally came to light. No mark remained for anyone to point to, but the whispers were enough.</p>
+<p>Ahmetra was shamed before the village. Wyse was not offered the Warder's oath. He was simply told to go.</p>
+<p>He left before they could make it formal, hoping that his absence would spare his mother from paying any more for what had been done to her.</p>
+        <p class="pull">As exiles do, he gave up his forest name at the jungle's edge. He kept only the one his mother had given him: Wyse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="north-band" id="north">
+  <div class="wrap">
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_beach.webp" alt="Wyse resting on a beach at sunset beneath a pagoda lighthouse on a mossy rock" loading="lazy" style="object-position:40% center"></div>
+      <div class="text">
+        <h3>The Long Wandering</h3>
+<p>For more than a century and a half, Wyse drifted.</p>
+<p>He spent decades in cities that would tolerate a quiet, odd stranger, learning from smiths, clockmakers, and anyone who understood crystals. He rebuilt his blades again and again, each time holding more and wasting less.</p>
+<p>He learned, sometimes nearly too late, which places could starve him: aether-poor wastes, ancient ruins, and battlefields drained of life. Since then he has never traveled without spare reserve crystals sewn into his coat.</p>
+<p>When Wyse was around one hundred and forty, word reached him from the north. The small republic of his father's people had conquered all of Ilsabard and crowned an emperor. The people once driven away for lacking magic had built machines strong enough to turn on the rest of the world. Wyse understood them better than he wanted to.</p>
+        <p>Barely two decades after that, the Empire marched on Dalmasca. Imperial units were sent into the Golmore Jungle to hunt the Viera and drag them to Rabanastre. The forest that had cast him out was burning, and the people who had made him were the ones setting the fires.</p>
+        <p class="pull">What Wyse did then is a story he does not tell.</p>
+        <p>Years later the Seventh Umbral Calamity tore across Eorzea and threw the land's aether into chaos. For someone like Wyse it was both a feast and a nightmare: aether everywhere, wild and impossible to hold.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="chapter reveal">
+      <div class="art"><img src="img/enh_shower.webp" alt="Wyse beneath an outdoor shower among jungle plants and glowing potion bottles" loading="lazy" style="object-position:30% center"></div>
+      <div class="text">
+        <h3>Wyse Today</h3>
+<p>Now around one hundred and ninety years old, Wyse looks like a seasoned Viera in the prime of his life. Nothing on his face reveals what he is. If he is careful, no one ever has to know.</p>
+<p>He is a wanderer and an engineer, a man who treats aether the way a desert traveler treats water: something to be gathered, stored, and spent with care, and never assumed. The Viera do not fully trust him. The Garleans would never claim him. He belongs to neither, and he has made his peace with that, mostly.</p>
+        <p class="pull">He keeps his reserves full, his blades close, and the pearl in the pommel turned inward, where no one else can see it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="reveal"><p class="eyebrow">In Eorzea</p><h2>Gallery</h2></div>
+    <div class="gallery reveal">
+      <figure class="w2 h2"><img src="img/enh_hunting.webp" alt="Wyse clinging to a tree trunk above a campfire" loading="lazy" style="object-position:35% center"><figcaption>The Hunt</figcaption></figure>
+      <figure class="w2"><img src="img/enh_hunting3.webp" alt="Wyse with blades drawn facing a beast" loading="lazy"><figcaption>Between the Roots</figcaption></figure>
+      <figure><img src="img/enh_hunting2.webp" alt="Close view of Wyse's tattooed arm and blade" loading="lazy" style="object-position:35% center"><figcaption>Ink &amp; Steel</figcaption></figure>
+      <figure><img src="img/enh_smithing.webp" alt="Wyse at a workbench at night" loading="lazy" style="object-position:65% center"><figcaption>The Forge</figcaption></figure>
+      <figure class="w2"><img src="img/enh_beach.webp" alt="Wyse resting on a beach at sunset" loading="lazy" style="object-position:40% 70%"><figcaption>Lighthouse Shore</figcaption></figure>
+      <figure class="w2"><img src="img/enh_waterfall.webp" alt="Wyse waist-deep beside a waterfall" loading="lazy" style="object-position:70% 30%"><figcaption>The Falls</figcaption></figure>
+      <figure class="w2"><img src="img/enh_shower.webp" alt="Wyse beneath an outdoor jungle shower" loading="lazy" style="object-position:35% 30%"><figcaption>Rainwater</figcaption></figure>
+      <figure class="w2"><img src="img/cover_polished.webp" alt="Wyse crouched on a giant root in the Golmore at night" loading="lazy" style="object-position:64% center"><figcaption>The Golmore</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="ooc">
+  <div class="wrap ooc">
+    <div class="reveal ooc-head"><p class="eyebrow">Out of Character</p><h2>OOC Information</h2>
+      <p class="ooc-lede">I do both RP and ERP. Please see my F-list for further boundaries and information regarding ERP.</p></div>
+    <div class="rp-status reveal">
+      <div><strong><span class="dot" aria-hidden="true"></span>WU/T</strong><p>Normally in RP even without the tag on, so feel free to approach.</p></div>
+    </div>
+    <dl class="ooc-grid reveal">
+      <div><dt>Timezone</dt><dd>MDT (GMT&minus;6)</dd></div>
+      <div><dt>Server</dt><dd>Crystal &rarr; Brynhildr</dd></div>
+      <div><dt>RP Preference</dt><dd>In-game. I'm really bad about RPing via Discord, though for short sessions or to finish up an RP I would consider it.</dd></div>
+      <div><dt>RP Perspective</dt><dd>3rd person (will not write in 1st person)</dd></div>
+    </dl>
+    <div class="ooc-notes">
+      <article class="reveal"><span class="t-label">RP Notes</span><p>I am still newer to RP in general and still struggle with RPing in open RP with a lot of people around. I only started to RP in December of '23 and am still learning how to do everything, so if something is off please let me know. I enjoy continuing to learn. I am also still learning a lot of FF14 lore, so please be patient if I say or do something that is out of context for the game.</p></article>
+      <article class="reveal"><span class="t-label">Additional Notes</span><p>I am in my 30s and married with children. I am not available to RP 24/7 and have a life outside of FF14 and RP. While engaging in ERP I am very big on open communication, and want to make sure that all party members are comfortable and not overstepping any boundaries. If at any point I feel that someone gets overly attached or starts to take things from IC to OOC, I will bring this up and handle it immediately and will no longer have any contact with you.</p></article>
+    </div>
+    <div class="ooc-cta reveal">
+      <a class="flist-btn" href="https://www.f-list.net/c/wyse%20kerrac/" target="_blank" rel="noopener">View my F-list &rarr;</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="pearl"></div>
+  <p>WYSE &middot; A Final Fantasy XIV character. FINAL FANTASY XIV &copy; SQUARE ENIX. Fan content, not affiliated.</p>
+</footer>
+
+<div class="lightbox" id="lb"><img alt=""></div>
+
+<script>
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const nv=document.querySelector('nav');addEventListener('scroll',()=>nv.classList.toggle('solid',scrollY>60),{passive:true});
+// lightbox
+const lb=document.getElementById('lb');
+document.querySelectorAll('.gallery figure, .chapter .art, .wide').forEach(f=>f.addEventListener('click',()=>{lb.querySelector('img').src=f.querySelector('img').src;lb.querySelector('img').alt=f.querySelector('img').alt;lb.classList.add('open')}));
+lb.addEventListener('click',()=>lb.classList.remove('open'));
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+// aether motes
+(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const c=document.getElementById('motes'),x=c.getContext('2d');let w,h,ps=[];
+const rs=()=>{w=c.width=innerWidth;h=c.height=innerHeight};rs();addEventListener('resize',rs);
+for(let i=0;i<46;i++)ps.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.8+.4,v:Math.random()*.35+.08,p:Math.random()*6.28});
+(function t(){x.clearRect(0,0,w,h);const n=document.body.classList.contains('north');
+for(const q of ps){q.y-=q.v;q.p+=.01;q.x+=Math.sin(q.p)*.25;if(q.y<-5){q.y=h+5;q.x=Math.random()*w}
+const a=.35+Math.sin(q.p*2)*.25;x.beginPath();x.arc(q.x,q.y,q.r,0,6.28);x.fillStyle=n?`rgba(220,232,240,${a})`:`rgba(95,227,196,${a})`;x.shadowBlur=8;x.shadowColor=n?'#cfe0ea':'#5fe3c4';x.fill()}
+requestAnimationFrame(t)})()})();
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
