@@ -215,6 +215,22 @@ nav ul{margin-left:auto}
 body{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,0 0 6px rgba(0,0,0,.9),0 2px 10px rgba(0,0,0,.8)}
 .chapter p,.ooc-notes p,.ooc-grid dd,.profile p,.traits p,.ooc-lede{color:#e3eae5}
 .nav-flist:hover,.flist-btn:hover{text-shadow:none}
+
+/* mobile menu */
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0 10px;margin-left:.75rem;background:transparent;border:1px solid rgba(95,227,196,.35);border-radius:10px;cursor:pointer}
+.nav-toggle span{display:block;height:2px;width:100%;background:#d5ddd8;border-radius:2px;transition:transform .25s,opacity .2s}
+.nav-toggle:hover{border-color:var(--aether)}
+nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+nav.open .nav-toggle span:nth-child(2){opacity:0}
+nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:860px){
+  .nav-toggle{display:flex}
+  .nav-flist{margin-left:auto}
+  nav ul{display:none;position:absolute;top:100%;right:clamp(1.25rem,3vw,2.5rem);flex-direction:column;gap:0;min-width:200px;margin:.5rem 0 0;padding:.5rem;background:rgba(7,11,9,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+  nav.open ul{display:flex}
+  nav ul a{display:block;padding:.8rem 1rem;border-radius:8px;font-size:var(--text-base,1rem)}
+  nav ul a:hover{background:rgba(95,227,196,.08)}
+}
 </style>
 </head>
 <body>
@@ -224,13 +240,14 @@ body{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000
 
 <nav>
   <a class="mark" href="#top">WYSE</a>
-  <ul>
+  <ul id="nav-menu">
     <li><a href="#about">About</a></li>
     <li><a href="#story">Story</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#ooc">OOC</a></li>
   </ul>
   <a class="nav-flist" href="https://www.f-list.net/c/wyse%20kerrac/" target="_blank" rel="noopener">F-list</a>
+  <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
 </nav>
 
 <header class="hero" id="top">
@@ -424,12 +441,12 @@ body{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000
     <dl class="ooc-grid reveal">
       <div><dt>Timezone</dt><dd>MDT (GMT&minus;6)</dd></div>
       <div><dt>Server</dt><dd>Crystal &rarr; Brynhildr</dd></div>
-      <div><dt>RP Preference</dt><dd>In-game. I'm really bad about RPing via Discord, though for short sessions or to finish up an RP I would consider it.</dd></div>
-      <div><dt>RP Perspective</dt><dd>3rd person (will not write in 1st person)</dd></div>
+      <div><dt>RP Preference</dt><dd>In game or Discord. I prefer in game for quicker scenes and ERP so that we can get through them, though I am not opposed to writing on Discord if they are quicker replies. I prefer to use Discord if we are going to be doing longer ongoing stories, to plan and track details.</dd></div>
+      <div><dt>RP Perspective</dt><dd>I typically default to 3rd person past tense, though I can write in 1st person if that is preferred.</dd></div>
     </dl>
     <div class="ooc-notes">
       <article class="reveal"><span class="t-label">RP Notes</span><p>I am still newer to RP in general and still struggle with RPing in open RP with a lot of people around. I only started to RP in December of '23 and am still learning how to do everything, so if something is off please let me know. I enjoy continuing to learn. I am also still learning a lot of FF14 lore, so please be patient if I say or do something that is out of context for the game.</p></article>
-      <article class="reveal"><span class="t-label">Additional Notes</span><p>I am in my 30s and married with children. I am not available to RP 24/7 and have a life outside of FF14 and RP. While engaging in ERP I am very big on open communication, and want to make sure that all party members are comfortable and not overstepping any boundaries. If at any point I feel that someone gets overly attached or starts to take things from IC to OOC, I will bring this up and handle it immediately and will no longer have any contact with you.</p></article>
+      <article class="reveal"><span class="t-label">Additional Notes</span><p>I am in my mid 30s and married with children, so I am not looking for anything that involves an IRL relationship other than friends and RP partners. I work from home most of the time, so I am around most of the time to be able to write, and I pretty much live on Discord to chat, brainstorm, hang out, etc. I am very big on open communication during both RP and ERP, and want to make sure that all party members are comfortable, are not overstepping any boundaries, and feel good about the scenes that we are writing. I have fairly thick skin, so if something comes up that you aren't comfortable with, or you don't like how I wrote something IC, let me know and we can adjust things at any point. As a note, if at any point I feel that someone gets overly attached or starts to take things from IC to OOC, I will bring this up and handle it immediately, and if it continues then I will have to break contact.</p></article>
     </div>
     <div class="ooc-cta reveal">
       <a class="flist-btn" href="https://www.f-list.net/c/wyse%20kerrac/" target="_blank" rel="noopener">View my F-list &rarr;</a>
@@ -464,6 +481,15 @@ for(let i=0;i<46;i++)ps.push({x:Math.random()*w,y:Math.random()*h,r:Math.random(
 for(const q of ps){q.y-=q.v;q.p+=.01;q.x+=Math.sin(q.p)*.25;if(q.y<-5){q.y=h+5;q.x=Math.random()*w}
 const a=.35+Math.sin(q.p*2)*.25;x.beginPath();x.arc(q.x,q.y,q.r,0,6.28);x.fillStyle=n?`rgba(220,232,240,${a})`:`rgba(95,227,196,${a})`;x.shadowBlur=8;x.shadowColor=n?'#cfe0ea':'#5fe3c4';x.fill()}
 requestAnimationFrame(t)})()})();
+</script>
+<script>
+(()=>{const nav=document.querySelector('nav'),btn=nav.querySelector('.nav-toggle');
+const set=o=>{nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);btn.setAttribute('aria-label',o?'Close menu':'Open menu')};
+btn.addEventListener('click',e=>{e.stopPropagation();set(!nav.classList.contains('open'))});
+nav.querySelectorAll('ul a').forEach(a=>a.addEventListener('click',()=>set(false)));
+document.addEventListener('click',e=>{if(!nav.contains(e.target))set(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+addEventListener('resize',()=>{if(innerWidth>860)set(false)});})();
 </script>
 <script data-pplx-inline-edit>
 (function () {
